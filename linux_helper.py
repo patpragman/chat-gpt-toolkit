@@ -13,7 +13,7 @@ import os
 import requests
 import argparse
 
-from queryGPT import query_davinci
+from toolkit.queryGPT import query_davinci
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-p", type=str)
