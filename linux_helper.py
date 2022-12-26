@@ -13,6 +13,8 @@ import os
 import requests
 import argparse
 
+from queryGPT import query_davinci
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-p", type=str)
 parser.add_argument("-e", default=False, action='store_true')
@@ -28,19 +30,7 @@ if __name__ == "__main__":
     prompt = args.p
     execute = args.e
 
-    data = {
-        "model": "text-davinci-003",
-        "prompt": f"respond with the command or code only to do the following:  {prompt}",
-        "max_tokens": 2048,
-        "temperature": 0
-    }
-
-    result = requests.post(URL,
-                           headers={'Content-Type': 'application/json',
-                                    'Authorization': 'Bearer {}'.format(API_KEY)},
-                           json=data)
-
-    return_text = result.json()['choices'][0]['text']
+    return_text = query_davinci(f"respond with the command or code only to do the following:  {prompt}")
 
     if verbose:
         print(f'you said: {prompt}')
